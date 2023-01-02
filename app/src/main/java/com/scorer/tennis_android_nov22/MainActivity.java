@@ -124,6 +124,7 @@ public class MainActivity extends Activity {
     private DataOutputStream wifi_dataOut;
     private BufferedReader wifi_dataIn;
 
+    // Other
     private buttonTimer button_counter;
 
     private batteryTimer battery_counter;
@@ -179,6 +180,7 @@ public class MainActivity extends Activity {
     private boolean last_Set_is_Tb_Game_bool = false;
     private int min_Points_To_Win_Tb_Game_int;
 
+    private int reset_Flag_int;
 
 // ******************************************************************************
 
@@ -223,7 +225,24 @@ public class MainActivity extends Activity {
 
         start_wifiTimer();
 
-        game_Notice();
+// Flash Reset on Startup
+        String s = myDb.readSystemStr(DBAdapter.KEY_SYSTEM_RESET);
+        reset_Flag_int = Integer.parseInt(s);
+
+        if (reset_Flag_int == 1) {
+            t = findViewById(id.id_no);
+            t.setText("   ");
+
+            t = findViewById(id.id_notice);
+            t.setText(R.string.reset1);
+
+            t = findViewById(id.id_game);
+            t.setText("              ");
+
+            start_reset_flashTimer();
+        } else {
+            game_Notice();
+        }
 
 // TODO
         // Data Base Viewer - To be deleted  ********************************************************
@@ -290,8 +309,9 @@ public class MainActivity extends Activity {
 
         setup_Game_Variables();
 
-        game_Notice();
-
+        if (reset_Flag_int == 0) {
+            game_Notice();
+        }
 // *********** Club
 
         t = findViewById(id.id_club);
@@ -1237,6 +1257,8 @@ public class MainActivity extends Activity {
 
             start_reset_flashTimer();
 
+            myDb.updateSystem(DBAdapter.KEY_SYSTEM_RESET, 1);
+
             t = findViewById(id.id_game);
             t.setText("              ");
 
@@ -1599,6 +1621,9 @@ public class MainActivity extends Activity {
 
                         stop_reset_flashTimer();
 
+                        myDb.updateSystem(DBAdapter.KEY_SYSTEM_RESET, 0);
+                        reset_Flag_int = 0;
+
                         t = findViewById(id.id_notice);
                         t.setVisibility(View.VISIBLE);
 
@@ -1615,14 +1640,15 @@ public class MainActivity extends Activity {
                     }
                 }
         );
+
         ad.setNegativeButton(button2String, new DialogInterface.OnClickListener() {
 
-            @Override
-            public void onClick(DialogInterface dialog, int arg1) {
-                // do nothing
-                myDb.K_Log("Reset No");
-            }
-        }
+                    @Override
+                    public void onClick(DialogInterface dialog, int arg1) {
+                        // do nothing
+                        myDb.K_Log("Reset No");
+                    }
+                }
         );
         ad.show();
     }
@@ -2452,7 +2478,7 @@ public class MainActivity extends Activity {
             if (server_flash) {
                 t = findViewById(R.id.id_set_server);
                 t.setVisibility(View.VISIBLE);
-            } else {    
+            } else {
                 t = findViewById(R.id.id_set_server);
                 t.setVisibility(View.INVISIBLE);
             }

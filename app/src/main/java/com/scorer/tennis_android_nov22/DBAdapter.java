@@ -21,7 +21,7 @@ public class DBAdapter {
     // ***********************************
 
     // Database Version
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
     // ***********************************
 
     // Table Names
@@ -83,6 +83,8 @@ public class DBAdapter {
     public static final String KEY_SYSTEM_SET_5_H = "system_set_5_h";
     public static final String KEY_SYSTEM_SET_5_V = "system_set_5_v";
 
+    public static final String KEY_SYSTEM_RESET = "system_reset";          // 0 - No  1 - Yes
+
     public static final String[] SYSTEM_KEYS = new String[]{
             KEY_SYSTEM_ID,
             KEY_SYSTEM_CLUB,
@@ -119,7 +121,8 @@ public class DBAdapter {
             KEY_SYSTEM_SET_4_H,
             KEY_SYSTEM_SET_4_V,
             KEY_SYSTEM_SET_5_H,
-            KEY_SYSTEM_SET_5_V      };
+            KEY_SYSTEM_SET_5_V,
+            KEY_SYSTEM_RESET};
 
     // ***********************************
 
@@ -171,7 +174,8 @@ public class DBAdapter {
             + KEY_SYSTEM_SET_4_H + " INTEGER,"
             + KEY_SYSTEM_SET_4_V + " INTEGER,"
             + KEY_SYSTEM_SET_5_H + " INTEGER,"
-            + KEY_SYSTEM_SET_5_V + " INTEGER"
+            + KEY_SYSTEM_SET_5_V + " INTEGER,"
+            + KEY_SYSTEM_RESET + " INTEGER"
             + ")";
 
     // Log table create statement
@@ -272,6 +276,7 @@ public class DBAdapter {
             initialValues.put(KEY_SYSTEM_SET_4_V, "0");
             initialValues.put(KEY_SYSTEM_SET_5_H, "0");
             initialValues.put(KEY_SYSTEM_SET_5_V, "0");
+            initialValues.put(KEY_SYSTEM_RESET, "0");
 
             db.insert(TABLE_SYSTEM, null, initialValues);
             db.execSQL(CREATE_TABLE_LOG);
@@ -284,8 +289,8 @@ public class DBAdapter {
             L.d("Upgrade");
 
 
-                db.execSQL("DROP TABLE IF EXISTS " + TABLE_SYSTEM);
-                onCreate(db);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_SYSTEM);
+            onCreate(db);
         }
     }
 
@@ -382,12 +387,12 @@ public class DBAdapter {
 
     // Return all log rows in the database.
     public Cursor getAllLogRows() {
-            Cursor c = db.query(true, TABLE_LOG, LOG_KEYS, null, null, null, null, "_id DESC", null);
-            if (c != null) {
-                c.moveToFirst();
-            }
+        Cursor c = db.query(true, TABLE_LOG, LOG_KEYS, null, null, null, null, "_id DESC", null);
+        if (c != null) {
+            c.moveToFirst();
+        }
 
-            return c;
+        return c;
     }
 
     // ***********************************
@@ -438,6 +443,4 @@ public class DBAdapter {
             return alc;
         }
     }
-
-
 }
