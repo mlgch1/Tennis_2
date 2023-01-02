@@ -2452,7 +2452,7 @@ public class MainActivity extends Activity {
             if (server_flash) {
                 t = findViewById(R.id.id_set_server);
                 t.setVisibility(View.VISIBLE);
-            } else {
+            } else {    
                 t = findViewById(R.id.id_set_server);
                 t.setVisibility(View.INVISIBLE);
             }
