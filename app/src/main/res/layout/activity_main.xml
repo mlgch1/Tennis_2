@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/id_container1"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="550dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
+
+    <View
+        android:id="@+id/id_line_h1"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/blue"/>
+
+    <!-- Top Bar ****************************************************************** -->
+
+    <RelativeLayout
+        android:id="@+id/id_topBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/id_line_h1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/id_wifi_message"
+            android:layout_width="95dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/wifi_disabled"
+            android:textColor="#ff0000"
+            android:textSize="@dimen/f_text_20"/>
+
+        <View
+            android:id="@+id/id_vert_1"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/id_wifi_message"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="0dp"
+            android:background="@color/blue"/>
+
+        <TextView
+            android:id="@+id/id_club"
+            android:layout_width="490dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="160dp"
+            android:singleLine="true"
+            android:textColor="#ff0000"
+            android:textSize="@dimen/f_text_30" />
+
+        <View
+            android:id="@+id/id_vert_2"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:layout_toStartOf="@id/id_wifi_connected"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/blue"/>
+
+        <TextView
+            android:id="@+id/id_wifi_connected"
+            android:layout_width="100dp"
+            android:layout_toStartOf="@id/id_vert_3"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+             android:text="@string/wifi_not_connected_1"
+            android:textColor="#ff0000"
+            android:textSize="@dimen/f_text_20"/>
+
+        <View
+            android:id="@+id/id_vert_3"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:layout_toStartOf="@id/id_wifi_dot"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/blue"/>
+
+        <ImageView
+            android:id="@+id/id_wifi_dot"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="6dp"
+            android:src="@drawable/green_dot"
+            android:visibility="invisible"
+            tools:ignore="ContentDescription" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/id_line_h2"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_below="@+id/id_topBar"
+        android:background="@color/blue"/>
+
+    <!-- End Top Bar **************************************************************** -->
+
+
+    <!-- Score Bar ****************************************************************** -->
+
+    <RelativeLayout
+        android:id="@+id/id_scoreBar"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_below="@id/id_line_h2"
+        android:layout_marginTop="7dp"
+        android:background="@color/green">
+
+        <TextView
+            android:id="@+id/id_server_outline_a"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/yellow"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onClick_server_a" />
+
+        <TextView
+            android:id="@+id/id_server_mark_a"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/red"
+            android:gravity="center_horizontal"
+            android:text="@string/server"
+            android:textSize="@dimen/f_text_30"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/id_server_outline_b"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/id_server_mark_a"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"
+            android:background="@color/yellow"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onClick_server_b" />
+
+        <TextView
+            android:id="@+id/id_server_mark_b"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/id_server_mark_a"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"
+            android:background="@color/red"
+            android:gravity="center_horizontal"
+            android:text="@string/server"
+            android:textSize="@dimen/f_text_30"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/id_name_a"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="20dp"
+            android:singleLine="true"
+            android:text="@string/home"
+            android:textSize="@dimen/f_text_40" />
+
+        <TextView
+            android:id="@+id/id_name_b"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/id_name_a"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="20dp"
+            android:singleLine="true"
+            android:text="@string/visitors"
+            android:textSize="@dimen/f_text_40" />
+
+        <!-- Sets -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="410dp"
+            android:layout_marginTop="0dp"
+            android:text="@string/sets"
+            android:textColor="#FF0000"
+            android:textSize="@dimen/f_text_20" />
+
+        <TextView
+            android:id="@+id/id_sets_a"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="400dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/g_back"
+            android:gravity="center_horizontal"
+            android:text="@string/_0"
+            android:textColor="#FF0000"
+            android:textSize="@dimen/f_text_40" />
+
+        <TextView
+            android:id="@+id/id_sets_b"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/id_sets_a"
+            android:layout_marginStart="400dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/g_back"
+            android:gravity="center_horizontal"
+            android:text="@string/_0"
+            android:textColor="#FF0000"
+            android:textSize="@dimen/f_text_40" />
+
+        <!-- Games -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="500dp"
+            android:layout_marginTop="0dp"
+            android:text="@string/games"
+            android:textColor="#FF7F00"
+            android:textSize="@dimen/f_text_20" />
+
+        <TextView
+            android:id="@+id/id_games_a"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="500dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/g_back"
+            android:gravity="center_horizontal"
+            android:text="@string/_0"
+            android:textColor="#FF7F00"
+            android:textSize="@dimen/f_text_40" />
+
+        <TextView
+            android:id="@+id/id_games_b"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/id_games_a"
+            android:layout_marginStart="500dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/g_back"
+            android:gravity="center_horizontal"
+            android:text="@string/_0"
+            android:textColor="#FF7F00"
+            android:textSize="@dimen/f_text_40" />
+
+        <!-- Points -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="610dp"
+            android:layout_marginTop="0dp"
+            android:text="@string/points"
+            android:textColor="#2A2AFF"
+            android:textSize="@dimen/f_text_20"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/id_points_a"
+            android:layout_width="90dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="600dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/g_back"
+            android:gravity="center_horizontal"
+            android:text="0"
+            android:textColor="#2A2AFF"
+            android:textSize="@dimen/f_text_40"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/id_points_b"
+            android:layout_width="90dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/id_games_a"
+            android:layout_marginStart="600dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/g_back"
+            android:gravity="center_horizontal"
+            android:text="@string/_0"
+            android:textColor="#2A2AFF"
+            android:textSize="@dimen/f_text_40" />
+
+        <!-- Advantage/Tie Break Notice -->
+
+        <TextView
+            android:id="@+id/id_no"
+            android:layout_width="470dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="680dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:textColor="#FF0000"
+            android:textSize="@dimen/f_text_40"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/id_notice"
+            android:layout_width="470dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="680dp"
+            android:layout_marginTop="60dp"
+            android:gravity="center_horizontal"
+            android:textColor="#FF0000"
+            android:textSize="@dimen/f_text_40"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/id_game"
+            android:layout_width="470dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="680dp"
+            android:layout_marginTop="100dp"
+            android:gravity="center_horizontal"
+            android:textColor="#FF0000"
+            android:textSize="@dimen/f_text_40"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/id_line_h4"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_below="@+id/id_scoreBar"
+        android:background="@color/blue"/>
+
+
+    <!-- Rules Bar ****************************************************************** -->
+
+    <RelativeLayout
+        android:id="@+id/id_rulesBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/id_line_h4" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/id_rules_1"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="10dp"
+            android:text="rules_1"
+            android:textColor="@color/red"
+            android:textSize="@dimen/f_text_25"/>
+
+        <TextView
+            android:id="@+id/id_rules_2"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="10dp"
+            android:text="rules_2"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/f_text_25"/>
+
+        <TextView
+            android:id="@+id/id_rules_3"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="-10dp"
+            android:text="rules_3"
+            android:textColor="@color/red"
+            android:textSize="@dimen/f_text_25"/>
+
+            <TextView
+                android:id="@+id/id_rules_4"
+                android:layout_width="443dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="7dp"
+                android:text="rules_4"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/f_text_25" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/id_line_h5"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_below="@+id/id_line_h4"
+        android:layout_marginTop="50dp"
+        android:background="@color/blue"/>
+
+    <!-- Team Bar ****************************************************************** -->
+
+    <RelativeLayout
+        android:id="@+id/id_teamBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/id_line_h5"
+        android:background="@color/green">
+
+        <LinearLayout
+            android:id="@+id/id_teamBar_a"
+            android:layout_width="470dp"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/id_A_Team"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_gravity="center_vertical"
+                android:singleLine="true"
+                android:gravity="center_horizontal"
+                android:text="@string/space"
+                android:textColor="@color/red"
+                android:textSize="@dimen/f_text_30"/>
+
+            <Button
+                android:id="@+id/id_b_name_a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginEnd="0dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/g_back"
+                android:onClick="onClick_name_a"
+                android:text="@string/name"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/id_teamBar_b"
+            android:layout_width="500dp"
+            android:layout_height="50dp"
+            android:layout_toEndOf="@+id/id_teamBar_a"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/id_B_Team"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_gravity="center_vertical"
+                android:singleLine="true"
+                android:gravity="center_horizontal"
+                android:text="@string/space"
+                android:textColor="@color/red"
+                android:textSize="@dimen/f_text_30"/>
+
+            <Button
+                android:id="@+id/id_b_name_br"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginEnd="20dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/g_back"
+                android:onClick="onClick_name_b"
+                android:text="@string/name"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/id_line_h6"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_below="@+id/id_teamBar"
+        android:background="@color/blue"/>
+
+
+    <!-- Scoring Bar ****************************************************************** -->
+
+    <RelativeLayout
+        android:id="@+id/id_scoringBar"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/id_line_h6">
+
+        <TextView
+            android:id="@+id/id_set_server"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="00dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/set_the_server"
+            android:textColor="@color/red"
+            android:visibility="invisible"
+            android:textSize="@dimen/f_text_40"/>
+
+        <LinearLayout
+            android:id="@+id/id_scoringBar_a"
+            android:layout_width="490dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/id_b_pointsPlus_a"
+                android:layout_width="@dimen/b_l_size_2"
+                android:layout_height="@dimen/b_l_size_2"
+                android:layout_marginStart="60dp"
+                android:background="@drawable/button1"
+                android:onClick="onClick_pointsPlus_a"
+                android:text="@string/_b_"
+                android:textSize="@dimen/f_text_20"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/id_b_pointsNeg_a"
+                android:layout_width="@dimen/b_l_size"
+                android:layout_height="@dimen/b_l_size"
+                android:layout_marginStart="180dp"
+                android:background="@drawable/button1"
+                android:onClick="onClick_pointsNeg_a"
+                android:text="@string/b_"
+                android:textSize="@dimen/f_text_20"
+                android:visibility="invisible"
+                tools:ignore="ButtonStyle" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/id_scoringBar_b"
+            android:layout_width="630dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="50dp"
+            android:layout_toEndOf="@+id/id_scoringBar_a"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/id_b_pointsPlus_b"
+                android:layout_width="@dimen/b_l_size_2"
+                android:layout_height="@dimen/b_l_size_2"
+                android:layout_marginStart="60dp"
+                android:background="@drawable/button1"
+                android:onClick="onClick_pointsPlus_b"
+                android:text="@string/_b_"
+                android:textSize="@dimen/f_text_20"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/id_b_pointsNeg_b"
+                android:layout_width="@dimen/b_l_size"
+                android:layout_height="@dimen/b_l_size"
+                android:layout_marginStart="180dp"
+                android:background="@drawable/button1"
+                android:onClick="onClick_pointsNeg_b"
+                android:text="@string/b_"
+                android:visibility="invisible"
+                android:textSize="@dimen/f_text_20"
+                tools:ignore="ButtonStyle" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!-- End Scoring Bar *************************************************************** -->
+
+    <!-- Vertical Lines ****************************************************************** -->
+
+    <View
+        android:id="@+id/id_line_v1"
+        android:layout_width="4dp"
+        android:layout_height="500dp"
+        android:layout_below="@+id/id_line_h5"
+        android:layout_centerHorizontal="true"
+        android:background="@color/blue"/>
+
+</RelativeLayout>

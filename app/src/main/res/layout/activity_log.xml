@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dp"
+    android:layout_height="520dp"
+    android:background="@color/grey" >
+
+    <TextView
+        android:id="@+id/id_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@color/grey"
+        android:text="@string/log"
+        android:textColor="#0000ff"
+        android:textSize="@dimen/f_text_30" />
+
+    <ListView
+        android:id="@+id/id_log_list"
+        android:layout_width="match_parent"
+        android:layout_height="390sp"
+        android:layout_below="@+id/id_log"
+        android:background="@color/white"
+        android:dividerHeight="0dp"
+        android:fadeScrollbars="false" >
+    </ListView>
+
+    <Button
+        android:id="@+id/b_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/b_bott_size"
+        android:layout_below="@+id/id_log_list"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/button1"
+        android:onClick="onClick"
+        android:text="@string/close"
+        android:textSize="@dimen/f_text_15" />
+
+    <Button
+        android:id="@+id/b_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/id_log_list"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button1"
+        android:onClick="Clear_Log"
+        android:text="@string/clear_log"
+        android:textSize="@dimen/f_text_15" />
+
+</RelativeLayout>

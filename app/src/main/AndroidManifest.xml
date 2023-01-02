@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:name=".GlobalClass"
+        android:allowBackup="false"
+        android:icon="@drawable/scat"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Holo.Light">
+
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="reverseLandscape"
+            android:launchMode="singleTop"
+            android:theme="@style/MyCustomTheme"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".AndroidDatabaseManager"
+            android:theme="@android:style/Theme.Holo.Light" />
+
+
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="reverseLandscape" />
+        <activity
+            android:name=".TestActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".SetupActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".PDFActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".ParamsActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".DisclaimerActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".t_dActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".AboutActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".RulesActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".ManualActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".ResultsActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".AboutScorerActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".PasswordActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".Name_A_Activity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".Name_B_Activity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".Splash_GameActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" />
+        <activity
+            android:name=".Splash_SetActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" />
+        <activity
+            android:name=".Splash_MatchActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" />
+        <activity
+            android:name=".Splash_TieBreakActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" />
+        <activity
+            android:name=".Splash_DeuceActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" />
+        <activity
+            android:name=".Splash_AdvActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" />
+        <activity
+            android:name=".SetupBatteryActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".LogActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".WiFiSetupActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".ClubSetupActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Dialog" />
+    </application>
+
+</manifest>
