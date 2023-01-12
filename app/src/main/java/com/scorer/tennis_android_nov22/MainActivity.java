@@ -642,7 +642,7 @@ public class MainActivity extends Activity {
 
         resetAlertDialog();
 
-        onPause();
+//        onPause();
 
         myDb.K_Log(getString(R.string.reset));
     }
@@ -664,7 +664,7 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(MainActivity.this, SetupActivity.class);
         startActivity(intent);
 
-        onPause();
+//        onPause();
 
         myDb.K_Log(getString(R.string.open_setup));
     }
@@ -1631,8 +1631,14 @@ public class MainActivity extends Activity {
                         match_Complete_bool = false;
                         this_Is_Last_Set_bool = false;
 
-                        Intent s_intent = new Intent(MainActivity.this, RulesActivity.class);
-                        startActivity(s_intent);
+
+                        changeRulesDialog();
+
+
+
+
+
+
 
                         myDb.K_Log("Reset Yes");
 
@@ -1679,6 +1685,38 @@ public class MainActivity extends Activity {
             public void onClick(DialogInterface dialog, int arg1) {
                 // do nothing
                 myDb.K_Log("Quit Not");
+            }
+        });
+        ad.show();
+    }
+
+// ******************************************************************************
+
+    private void changeRulesDialog() {
+
+        Context context = MainActivity.this;
+        String message = "Do you want to Change the Rules for the next Match?";
+        String button1String = "Change";
+        String button2String = "Cancel";
+        AlertDialog.Builder ad = new AlertDialog.Builder(context);
+        ad.setMessage(message);
+        ad.setPositiveButton(button1String, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int arg1) {
+
+                myDb.K_Log("Change Rules");
+
+                Intent s_intent = new Intent(MainActivity.this, RulesActivity.class);
+                startActivity(s_intent);
+            }
+        });
+        ad.setNegativeButton(button2String, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int arg1) {
+                // do nothing
+                myDb.K_Log("Don't Change Rules");
             }
         });
         ad.show();
