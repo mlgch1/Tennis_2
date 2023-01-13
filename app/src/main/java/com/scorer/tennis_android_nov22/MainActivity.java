@@ -2312,7 +2312,11 @@ public class MainActivity extends Activity {
         }
 
         wifi_counter = new wifiTimer();
-        wifi_counter.start();
+
+// TODO
+
+
+//        wifi_counter.start();
     }
 
 // ******************************************************************************
