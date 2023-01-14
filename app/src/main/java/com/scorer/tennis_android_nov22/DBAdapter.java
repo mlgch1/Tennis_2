@@ -21,8 +21,19 @@ public class DBAdapter {
     // ***********************************
 
     // Database Version
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 7;
     // ***********************************
+
+// 5 - Added Reset
+// 6 - Added Display
+// 7 - Changed Display default from 0 to 1
+
+
+
+
+
+
+
 
     // Table Names
     public static final String TABLE_SYSTEM = "system";
@@ -35,6 +46,8 @@ public class DBAdapter {
     public static final String KEY_SYSTEM_ID = "_id";
 
     public static final String KEY_SYSTEM_CLUB = "system_club";
+
+    public static final String KEY_SYSTEM_DISPLAY = "system_display";
 
     public static final String KEY_SYSTEM_NAME_A = "system_name_a";
     public static final String KEY_SYSTEM_NAME_B = "system_name_b";
@@ -88,6 +101,7 @@ public class DBAdapter {
     public static final String[] SYSTEM_KEYS = new String[]{
             KEY_SYSTEM_ID,
             KEY_SYSTEM_CLUB,
+            KEY_SYSTEM_DISPLAY,
             KEY_SYSTEM_NAME_A,
             KEY_SYSTEM_NAME_B,
             KEY_SYSTEM_POINTS_A,
@@ -141,6 +155,7 @@ public class DBAdapter {
     private static final String CREATE_TABLE_SYSTEM = "CREATE TABLE if not exists " + TABLE_SYSTEM + "("
             + KEY_SYSTEM_ID + " INTEGER PRIMARY KEY autoincrement ,"
             + KEY_SYSTEM_CLUB + " TEXT,"
+            + KEY_SYSTEM_DISPLAY + " TEXT,"
             + KEY_SYSTEM_NAME_A + " TEXT,"
             + KEY_SYSTEM_NAME_B + " TEXT,"
             + KEY_SYSTEM_POINTS_A + " TEXT,"
@@ -235,7 +250,8 @@ public class DBAdapter {
             db.execSQL(CREATE_TABLE_SYSTEM);
             // Insert a zero row in system table.
             ContentValues initialValues = new ContentValues();
-            initialValues.put(KEY_SYSTEM_CLUB, "This is an ILLEGAL copy!");
+            initialValues.put(KEY_SYSTEM_CLUB, "Set up the parameters");
+            initialValues.put(KEY_SYSTEM_DISPLAY, "1");
             initialValues.put(KEY_SYSTEM_NAME_A, " ");
             initialValues.put(KEY_SYSTEM_NAME_B, " ");
             initialValues.put(KEY_SYSTEM_POINTS_A, "0");

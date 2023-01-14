@@ -46,4 +46,12 @@ public class ParamsActivity extends Activity {
         finish();
     }
 
+    // ***********************************
+
+    public void onClick_Display(View view) {
+        Intent s_intent = new Intent(this, DisplaySetupActivity.class);
+        startActivity(s_intent);
+        finish();
+    }
+
 }

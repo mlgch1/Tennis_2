@@ -57,7 +57,6 @@
     <string name="games">Games</string>
     <string name="h">H</string>
     <string name="home">Home</string>
-    <string name="illegal">ILLEGAL</string>
     <string name="increment_">Increment %</string>
     <string name="last_set">Last Set</string>
     <string name="last_set_tb">Last Set Tb</string>
@@ -183,6 +182,8 @@ This disclaimer statement is governed by the laws of the state of Victoria, Aust
     <string name="ss_3">Short Sets - 3 Games All then Tb</string>
     <string name="ss_4">Short Sets - 4 Games All then Tb</string>
     <string name="reset1">Reset!</string>
+    <string name="set_display_no">Set Display No.</string>
+    <string name="set_club_and_system_details">Set Club and System Details</string>
     <!--//    <string name="fast4_format">FAST4 Format</string>-->
 
 </resources>

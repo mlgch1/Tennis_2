@@ -24,9 +24,8 @@
 
         <TextView
             android:id="@+id/id_wifi_message"
-            android:layout_width="95dp"
+            android:layout_width="85dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:text="@string/wifi_disabled"
@@ -38,16 +37,14 @@
             android:layout_width="4dp"
             android:layout_height="match_parent"
             android:layout_toEndOf="@id/id_wifi_message"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="0dp"
             android:background="@color/blue"/>
 
         <TextView
             android:id="@+id/id_club"
-            android:layout_width="490dp"
+            android:layout_width="420dp"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="160dp"
+            android:layout_toEndOf="@id/id_vert_1"
+            android:layout_marginStart="30dp"
             android:singleLine="true"
             android:textColor="#ff0000"
             android:textSize="@dimen/f_text_30" />
@@ -56,27 +53,48 @@
             android:id="@+id/id_vert_2"
             android:layout_width="4dp"
             android:layout_height="match_parent"
-            android:layout_toStartOf="@id/id_wifi_connected"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_toEndOf="@id/id_club"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:background="@color/blue"/>
 
         <TextView
-            android:id="@+id/id_wifi_connected"
-            android:layout_width="100dp"
-            android:layout_toStartOf="@id/id_vert_3"
+            android:id="@+id/id_display"
+            android:layout_width="15dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-             android:text="@string/wifi_not_connected_1"
-            android:textColor="#ff0000"
+            android:layout_toEndOf="@id/id_vert_2"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:text="1"
+            android:textColor="#0000ff"
             android:textSize="@dimen/f_text_20"/>
 
         <View
             android:id="@+id/id_vert_3"
             android:layout_width="4dp"
             android:layout_height="match_parent"
-            android:layout_toStartOf="@id/id_wifi_dot"
+            android:layout_toEndOf="@id/id_display"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/blue"/>
+
+        <TextView
+            android:id="@+id/id_wifi_connected"
+            android:layout_width="100dp"
+            android:layout_toEndOf="@id/id_vert_3"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+             android:text="@string/wifi_not_connected_1"
+            android:textColor="#ff0000"
+            android:textSize="@dimen/f_text_20"/>
+
+        <View
+            android:id="@+id/id_vert_4"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/id_wifi_connected"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:background="@color/blue"/>
@@ -85,7 +103,7 @@
             android:id="@+id/id_wifi_dot"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/id_vert_4"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="6dp"

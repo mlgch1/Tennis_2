@@ -70,8 +70,6 @@ public class MainActivity extends Activity {
     private com.scorer.tennis_android_nov22.DBAdapter myDb;
     private TextView t;
 
-    private boolean no_onResume = false;
-
     private int c_points_h;         // current counters
     private int c_points_v;
     private int c_games_h;
@@ -95,8 +93,6 @@ public class MainActivity extends Activity {
     private boolean res_timerActive = false;
 
     private flashTimer flash_counter;
-
-    private illegal_flashTimer illegal_flash_counter;
 
     private server_flashTimer server_flash_counter;
 
@@ -199,12 +195,6 @@ public class MainActivity extends Activity {
         myDb.open();
 
         setupGlobals();
-
-        if (getClub().contains(getString(R.string.illegal))) {
-            start_illegal_flashTimer();
-
-            no_onResume = true;
-        }
 
         myDb.K_Log(getString(R.string.start_app));
 
@@ -316,22 +306,21 @@ public class MainActivity extends Activity {
         if (reset_Flag_int == 0) {
             game_Notice();
         }
+
 // *********** Club
 
         t = findViewById(id.id_club);
         t.setText(getClub());
 
-        if (getClub().contains(getString(R.string.illegal))) {
-            start_illegal_flashTimer();
-        } else {
-            stop_illegal_flashTimer();
-        }
+// *********** Display Number
 
-        if (no_onResume) return;
+        String s = myDb.readSystemStr(DBAdapter.KEY_SYSTEM_DISPLAY);
+        t = findViewById(id.id_display);
+        t.setText(s);
 
 // *********** Player Names
 
-        String s = myDb.readSystemStr(DBAdapter.KEY_SYSTEM_NAME_A);
+        s = myDb.readSystemStr(DBAdapter.KEY_SYSTEM_NAME_A);
         t = findViewById(id.id_name_a);
         t.setText(s);
 
@@ -2422,62 +2411,6 @@ public class MainActivity extends Activity {
         public void onTick(long millisUntilFinished) {
         }
 
-    }
-
-// ******************************************************************************
-// Timer for flashing ILLEGAL title
-// ******************************************************************************
-
-    private boolean illegal_flash = true;
-
-    public void start_illegal_flashTimer() {
-
-        if (illegal_flash_counter != null) {
-            return;
-        }
-        illegal_flash_counter = new illegal_flashTimer();
-        illegal_flash_counter.start();
-
-        illegal_flash = !illegal_flash;
-    }
-
-// ******************************************************************************
-
-    public void stop_illegal_flashTimer() {
-
-        if (illegal_flash_counter != null) {
-            illegal_flash_counter.cancel();
-            illegal_flash_counter = null;
-
-            t = findViewById(R.id.id_club);
-            t.setVisibility(View.INVISIBLE);
-        }
-    }
-
-// ******************************************************************************
-
-    private class illegal_flashTimer extends CountDownTimer {
-        illegal_flashTimer() {
-            super(500, 500);
-        }
-
-        @Override
-        public void onFinish() {
-            illegal_flash_counter = null;
-
-            if (illegal_flash) {
-                t = findViewById(R.id.id_club);
-                t.setVisibility(View.VISIBLE);
-            } else {
-                t = findViewById(R.id.id_club);
-                t.setVisibility(View.INVISIBLE);
-            }
-            start_illegal_flashTimer();
-        }
-
-        @Override
-        public void onTick(long millisUntilFinished) {
-        }
     }
 
 // ******************************************************************************

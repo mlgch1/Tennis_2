@@ -145,6 +145,10 @@
             android:name=".ClubSetupActivity"
             android:screenOrientation="reverseLandscape"
             android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".DisplaySetupActivity"
+            android:screenOrientation="reverseLandscape"
+            android:theme="@android:style/Theme.Dialog" />
     </application>
 
 </manifest>

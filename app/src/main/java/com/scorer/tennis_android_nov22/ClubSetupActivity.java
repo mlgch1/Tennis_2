@@ -27,6 +27,7 @@ public class ClubSetupActivity extends Activity {
 
         myDb.K_Log("Club Name Setup");
     }
+
     // ******************************************************************************
 
     @Override
@@ -35,6 +36,7 @@ public class ClubSetupActivity extends Activity {
         super.onDestroy();
         myDb.close();
     }
+
     // ******************************************************************************
 
      public void onClick(View view) {
@@ -49,7 +51,6 @@ public class ClubSetupActivity extends Activity {
                 myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_CLUB, strString);
                 setClub(strString);
         }
-
         finish();
     }
 }
