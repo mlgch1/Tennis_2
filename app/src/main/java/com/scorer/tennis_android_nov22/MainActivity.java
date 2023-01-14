@@ -188,6 +188,8 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        L.d("onCreate");
+
         Intent intent = new Intent(MainActivity.this, com.scorer.tennis_android_nov22.SplashActivity.class);
         startActivity(intent);
         setContentView(R.layout.activity_main);
@@ -208,9 +210,11 @@ public class MainActivity extends Activity {
 
         start_ResumeTimer();    // Delay onResume() for things to settle
 
+// Battery
         batteryTestLevel = getThresh();
         start_batteryTimer();
 
+// WiFi
         WifiManager wifi = (WifiManager) context.getApplicationContext().getSystemService(WIFI_SERVICE);
 
         wifi.setWifiEnabled(false);

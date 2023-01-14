@@ -302,23 +302,11 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/b_bott_size"
         android:layout_below="@+id/text_2"
-         android:layout_marginStart="250dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="13dp"
         android:background="@drawable/button1"
         android:onClick="onClick"
         android:text="@string/close"
-        android:textSize="@dimen/f_text_15"/>
-
-    <Button
-        android:id="@+id/b_check"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/b_bott_size"
-        android:layout_below="@+id/text_2"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/button1"
-        android:onClick="onCheck"
-        android:text="Check"
-        android:textSize="@dimen/f_text_15"/>
+        android:textSize="@dimen/f_text_15" />
 
 </RelativeLayout>

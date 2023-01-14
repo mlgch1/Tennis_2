@@ -46,8 +46,6 @@ public class ManualActivity extends Activity {
         s = myDb.readSystemStr(DBAdapter.KEY_SYSTEM_SETS_B);
         t = findViewById(R.id.sets_no_b);
         t.setText(s);
-
-        L.d("onCreate");
     }
 
 // ***********************************
@@ -61,6 +59,10 @@ public class ManualActivity extends Activity {
     // ***********************************
 
     public void onClick(View view) {
+
+        doCheck();
+
+        setupNextGame();
 
         // Points
 
@@ -94,9 +96,27 @@ public class ManualActivity extends Activity {
 
         finish();
     }
+
     // ***********************************
 
-    public void onCheck(View view) {
+    private void setupNextGame() {
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+    // ***********************************
+
+    public void doCheck() {
 
         //      0 - Love,       1 - 15,         2 - 30,         3 - 40,         4 - Adv
 
