@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import static com.scorer.tennis_android_nov22.GlobalClass.getClub;
-import static com.scorer.tennis_android_nov22.GlobalClass.setClub;
-
 public class ClubSetupActivity extends Activity {
 
     DBAdapter myDb;
@@ -23,7 +20,7 @@ public class ClubSetupActivity extends Activity {
         myDb.open();
 
         EditText text = findViewById(R.id.club);
-        text.setText("" + getClub());
+        text.setText("" + myDb.readSystemStr(DBAdapter.KEY_SYSTEM_CLUB));
 
         myDb.K_Log("Club Name Setup");
     }
@@ -49,7 +46,6 @@ public class ClubSetupActivity extends Activity {
          if (!strString.equals("")) {
                 myDb.K_Log("Club " + strString);
                 myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_CLUB, strString);
-                setClub(strString);
         }
         finish();
     }

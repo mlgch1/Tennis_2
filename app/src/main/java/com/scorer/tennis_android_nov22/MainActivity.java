@@ -9,14 +9,12 @@ package com.scorer.tennis_android_nov22;
 
 import static android.os.SystemClock.sleep;
 import static com.scorer.tennis_android_nov22.Config.context;
-import static com.scorer.tennis_android_nov22.GlobalClass.getClub;
 import static com.scorer.tennis_android_nov22.GlobalClass.getInc;
 import static com.scorer.tennis_android_nov22.GlobalClass.getSSID;
 import static com.scorer.tennis_android_nov22.GlobalClass.getStartTesting;
 import static com.scorer.tennis_android_nov22.GlobalClass.getTest;
 import static com.scorer.tennis_android_nov22.GlobalClass.getThresh;
 import static com.scorer.tennis_android_nov22.GlobalClass.setChannel;
-import static com.scorer.tennis_android_nov22.GlobalClass.setClub;
 import static com.scorer.tennis_android_nov22.GlobalClass.setInc;
 import static com.scorer.tennis_android_nov22.GlobalClass.setSSID;
 import static com.scorer.tennis_android_nov22.GlobalClass.setTest;
@@ -27,7 +25,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -243,12 +240,10 @@ public class MainActivity extends Activity {
 
         TextView tv = findViewById(R.id.id_wifi_message);
 
-        tv.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        tv.setOnClickListener(v -> {
 
-                Intent db_Manager = new Intent(MainActivity.this, AndroidDatabaseManager.class);
-                startActivity(db_Manager);
-            }
+            Intent db_Manager = new Intent(MainActivity.this, AndroidDatabaseManager.class);
+            startActivity(db_Manager);
         });
     }
 
@@ -284,8 +279,6 @@ public class MainActivity extends Activity {
 
         setSSID(myDb.readSystem(DBAdapter.KEY_SYSTEM_SSID));
         setChannel(myDb.readSystem(DBAdapter.KEY_SYSTEM_CHANNEL));
-
-        setClub(myDb.readSystemStr(DBAdapter.KEY_SYSTEM_CLUB));
     }
 
 // ******************************************************************************
@@ -310,13 +303,13 @@ public class MainActivity extends Activity {
 // *********** Club
 
         t = findViewById(id.id_club);
-        t.setText(getClub());
+        t.setText(myDb.readSystemStr(DBAdapter.KEY_SYSTEM_CLUB));
 
 // *********** Display Number
 
         String s = myDb.readSystemStr(DBAdapter.KEY_SYSTEM_DISPLAY);
         t = findViewById(id.id_display);
-        t.setText(s);
+        t.setText("No. " + s);
 
 // *********** Player Names
 
@@ -1123,19 +1116,15 @@ public class MainActivity extends Activity {
             case 5:
                 break;
             case 1:
+            case 3:
+            case 6:
                 win_Adv_Game();
                 break;
             case 2:
                 deuce();
                 break;
-            case 3:
-                win_Adv_Game();
-                break;
             case 4:
                 back_to_Deuce();
-                break;
-            case 6:
-                win_Adv_Game();
                 break;
         }
     }
@@ -1561,71 +1550,68 @@ public class MainActivity extends Activity {
         String button2String = getString(R.string.cancel);
         AlertDialog.Builder ad = new AlertDialog.Builder(context);
         ad.setMessage(message);
-        ad.setPositiveButton(button1String, new DialogInterface.OnClickListener() {
+        ad.setPositiveButton(button1String, (dialog, arg1) -> {
 
-                    @Override
-                    public void onClick(DialogInterface dialog, int arg1) {
+            myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_NAME_A, getString(R.string.home));
+            myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_NAME_B, getString(R.string.visitors));
 
-                        myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_NAME_A, getString(R.string.home));
-                        myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_NAME_B, getString(R.string.visitors));
+            // Reset scores
+            myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_POINTS_A, "0");
+            myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_POINTS_B, "0");
+            myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_GAMES_A, "0");
+            myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_GAMES_B, "0");
+            myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_SETS_A, "0");
+            myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_SETS_B, "0");
 
-                        // Reset scores
-                        myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_POINTS_A, "0");
-                        myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_POINTS_B, "0");
-                        myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_GAMES_A, "0");
-                        myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_GAMES_B, "0");
-                        myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_SETS_A, "0");
-                        myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_SETS_B, "0");
+            // Reset Results
+            myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_1_H, 0);
+            myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_1_V, 0);
+            myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_2_H, 0);
+            myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_2_V, 0);
+            myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_3_H, 0);
+            myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_3_V, 0);
+            myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_4_H, 0);
+            myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_4_V, 0);
+            myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_5_H, 0);
+            myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_5_V, 0);
 
-                        // Reset Results
-                        myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_1_H, 0);
-                        myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_1_V, 0);
-                        myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_2_H, 0);
-                        myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_2_V, 0);
-                        myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_3_H, 0);
-                        myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_3_V, 0);
-                        myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_4_H, 0);
-                        myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_4_V, 0);
-                        myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_5_H, 0);
-                        myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_5_V, 0);
+            t = findViewById(id.id_b_pointsNeg_a);
+            t.setVisibility(View.INVISIBLE);
+            t = findViewById(id.id_b_pointsNeg_b);
+            t.setVisibility(View.INVISIBLE);
 
-                        t = findViewById(id.id_b_pointsNeg_a);
-                        t.setVisibility(View.INVISIBLE);
-                        t = findViewById(id.id_b_pointsNeg_b);
-                        t.setVisibility(View.INVISIBLE);
+            // Reset Server
+            t = findViewById(id.id_server_mark_a);
+            t.setVisibility(View.INVISIBLE);
+            t = findViewById(id.id_server_mark_b);
+            t.setVisibility(View.INVISIBLE);
 
-                        // Reset Server
-                        t = findViewById(id.id_server_mark_a);
-                        t.setVisibility(View.INVISIBLE);
-                        t = findViewById(id.id_server_mark_b);
-                        t.setVisibility(View.INVISIBLE);
+            server = "Z";
+            myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_SERVER, server);
 
-                        server = "Z";
-                        myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_SERVER, server);
+            strPlayerButton = "Z";
+            buttons_On();
 
-                        strPlayerButton = "Z";
-                        buttons_On();
+            t = findViewById(id.id_set_server);
+            t.setVisibility(View.VISIBLE);
 
-                        t = findViewById(id.id_set_server);
-                        t.setVisibility(View.VISIBLE);
+            flipFlag_bool = false;
+            flipCounter_int = 2;
 
-                        flipFlag_bool = false;
-                        flipCounter_int = 2;
+            stop_reset_flashTimer();
 
-                        stop_reset_flashTimer();
+            myDb.updateSystem(DBAdapter.KEY_SYSTEM_RESET, 0);
+            reset_Flag_int = 0;
 
-                        myDb.updateSystem(DBAdapter.KEY_SYSTEM_RESET, 0);
-                        reset_Flag_int = 0;
+            t = findViewById(id.id_notice);
+            t.setVisibility(View.VISIBLE);
 
-                        t = findViewById(id.id_notice);
-                        t.setVisibility(View.VISIBLE);
-
-                        current_Game_Type_bool = false;
-                        match_Complete_bool = false;
-                        this_Is_Last_Set_bool = false;
+            current_Game_Type_bool = false;
+            match_Complete_bool = false;
+            this_Is_Last_Set_bool = false;
 
 
-                        changeRulesDialog();
+            changeRulesDialog();
 
 
 
@@ -1633,21 +1619,16 @@ public class MainActivity extends Activity {
 
 
 
-                        myDb.K_Log("Reset Yes");
+            myDb.K_Log("Reset Yes");
 
-                        onResume();
-                    }
-                }
+            onResume();
+        }
         );
 
-        ad.setNegativeButton(button2String, new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int arg1) {
-                        // do nothing
-                        myDb.K_Log("Reset No");
-                    }
-                }
+        ad.setNegativeButton(button2String, (dialog, arg1) -> {
+            // do nothing
+            myDb.K_Log("Reset No");
+        }
         );
         ad.show();
     }
@@ -1662,23 +1643,15 @@ public class MainActivity extends Activity {
         String button2String = "Cancel";
         AlertDialog.Builder ad = new AlertDialog.Builder(context);
         ad.setMessage(message);
-        ad.setPositiveButton(button1String, new DialogInterface.OnClickListener() {
+        ad.setPositiveButton(button1String, (dialog, arg1) -> {
 
-            @Override
-            public void onClick(DialogInterface dialog, int arg1) {
+            myDb.K_Log("Quit App");
 
-                myDb.K_Log("Quit App");
-
-                finish();
-            }
+            finish();
         });
-        ad.setNegativeButton(button2String, new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int arg1) {
-                // do nothing
-                myDb.K_Log("Quit Not");
-            }
+        ad.setNegativeButton(button2String, (dialog, arg1) -> {
+            // do nothing
+            myDb.K_Log("Quit Not");
         });
         ad.show();
     }
@@ -1693,24 +1666,16 @@ public class MainActivity extends Activity {
         String button2String = "Cancel";
         AlertDialog.Builder ad = new AlertDialog.Builder(context);
         ad.setMessage(message);
-        ad.setPositiveButton(button1String, new DialogInterface.OnClickListener() {
+        ad.setPositiveButton(button1String, (dialog, arg1) -> {
 
-            @Override
-            public void onClick(DialogInterface dialog, int arg1) {
+            myDb.K_Log("Change Rules");
 
-                myDb.K_Log("Change Rules");
-
-                Intent s_intent = new Intent(MainActivity.this, RulesActivity.class);
-                startActivity(s_intent);
-            }
+            Intent s_intent = new Intent(MainActivity.this, RulesActivity.class);
+            startActivity(s_intent);
         });
-        ad.setNegativeButton(button2String, new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int arg1) {
-                // do nothing
-                myDb.K_Log("Don't Change Rules");
-            }
+        ad.setNegativeButton(button2String, (dialog, arg1) -> {
+            // do nothing
+            myDb.K_Log("Don't Change Rules");
         });
         ad.show();
     }
@@ -1927,14 +1892,7 @@ public class MainActivity extends Activity {
         AlertDialog.Builder adb = new AlertDialog.Builder(context);
         adb.setMessage(message);
         adb.setTitle(no);
-        adb.setPositiveButton(button1String, new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int arg1) {
-
-                Alarm.stopAlarm();
-            }
-        });
+        adb.setPositiveButton(button1String, (dialog, arg1) -> Alarm.stopAlarm());
         ad = adb.create();
         ad.show();
     }
@@ -2011,6 +1969,7 @@ public class MainActivity extends Activity {
 
                 wifi_connected = false;
 
+                assert wifi != null;
                 wifi.setWifiEnabled(false);
                 try {
                     Thread.sleep(1000);
@@ -2223,21 +2182,11 @@ public class MainActivity extends Activity {
                         }
                         if (receive_Result.equals("3") && !wifi_stopReceive) {
                             wifi_stopReceive = true;
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    pointsPlus_b();
-                                }
-                            });
+                            runOnUiThread(MainActivity.this::pointsPlus_b);
                         }
                         if (receive_Result.equals("2") && !wifi_stopReceive) {
                             wifi_stopReceive = true;
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    pointsPlus_a();
-                                }
-                            });
+                            runOnUiThread(MainActivity.this::pointsPlus_a);
                         }
                     }
                 } catch (IOException ignored) {

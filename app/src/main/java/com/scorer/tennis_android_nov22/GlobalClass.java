@@ -7,50 +7,6 @@ public class GlobalClass extends Application {
 
     // ***********************************
 
-    private static String strClub = "This is an ILLEGAL copy!";
-
-    public static String getClub() { return strClub; }
-
-    public static void setClub(String aClub) { strClub = aClub; }
-
-//    // ***********************************
-//
-//    private static String strName_A = "";
-//
-//    public static String getName_A() { return strName_A; }
-//
-//    public static void setName_A(String aName_A) { strClub = aName_A; }
-//
-//    // ***********************************
-//
-//    private static String strName_B = "";
-//
-//    public static String getName_B() { return strName_B; }
-//
-//    public static void setName_B(String aName_B) { strName_B = aName_B; }
-//
-//    // ***********************************
-//
-//    private static boolean wifiSetup = false;
-//
-//    public static boolean getWiFiSetup() { return wifiSetup; }
-//
-//    public static void setWiFiSetup(boolean aSetup) { wifiSetup = aSetup; }
-//
-//    // ***********************************
-//
-//    private static boolean wifiRead = false;
-//
-//    public static boolean getWiFiRead() {
-//        return wifiRead;
-//    }
-//
-//    public static void setWiFiRead(boolean aRead) {
-//        wifiRead = aRead;
-//    }
-//
-    // ***********************************
-
     private static boolean test = false;
 
     public static boolean getTest() {
