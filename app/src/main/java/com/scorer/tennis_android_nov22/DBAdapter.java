@@ -221,7 +221,6 @@ public class DBAdapter {
     // Open the database connection.
     public void open() {
         db = myDBHelper.getWritableDatabase();
-        return;
     }
     // ***********************************
 

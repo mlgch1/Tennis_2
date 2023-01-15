@@ -1288,11 +1288,7 @@ public class MainActivity extends Activity {
                 if ((c_sets_h == next_To_Last_Set_int) || (c_sets_v == next_To_Last_Set_int)) {       // Last Set
                     this_Is_Last_Set_bool = true;
 
-                    if (!last_Set_is_Adv_bool) {
-                        current_Game_Type_bool = true;
-                    } else {
-                        current_Game_Type_bool = false;
-                    }
+                    current_Game_Type_bool = !last_Set_is_Adv_bool;
                 } else {
                     current_Game_Type_bool = true;
                 }

@@ -184,6 +184,7 @@ This disclaimer statement is governed by the laws of the state of Victoria, Aust
     <string name="reset1">Reset!</string>
     <string name="set_display_no">Set Display No.</string>
     <string name="set_club_and_system_details">Set Club and System Details</string>
+    <string name="rod_laver">Rod Laver</string>
     <!--//    <string name="fast4_format">FAST4 Format</string>-->
 
 </resources>

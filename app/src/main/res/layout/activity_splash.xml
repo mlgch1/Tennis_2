@@ -12,5 +12,5 @@
         android:layout_height="450sp"
 		android:layout_marginTop="50dp"
         android:src="@drawable/splash"
-        android:contentDescription="Rod Laver" />
+        android:contentDescription="@string/rod_laver" />
    </RelativeLayout>
