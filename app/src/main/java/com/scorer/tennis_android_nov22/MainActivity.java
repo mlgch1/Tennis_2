@@ -1067,7 +1067,7 @@ public class MainActivity extends Activity {
 
         // Advantage Set
 
-        if ((c_games_h < min_Games_To_Win_Set_int) && (c_games_v < min_Games_To_Win_Set_int)) {
+        if ((c_games_h <= min_Games_To_Win_Set_int) && (c_games_v <= min_Games_To_Win_Set_int)) {
             return;
         }
 
@@ -1233,7 +1233,6 @@ public class MainActivity extends Activity {
             }
         }
     }
-//    }
 
 // ******************************************************************************
 
