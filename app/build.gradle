@@ -10,7 +10,7 @@ android {
         applicationId "com.scorer.tennis_android_nov22_nov22"
         minSdkVersion 28
 
-        versionCode 1
+        versionCode 3
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

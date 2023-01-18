@@ -38,8 +38,12 @@ public class SetupActivity extends Activity {
 
     public void onClick_Rules(View view) {
         myDb.K_Log("Setup - Rules");
-        Intent s_intent = new Intent(SetupActivity.this, RulesActivity.class);
+
+// TODO
+        Intent s_intent = new Intent(this, LogActivity.class);
         startActivity(s_intent);
+//        Intent s_intent = new Intent(SetupActivity.this, RulesActivity.class);
+//        startActivity(s_intent);
         finish();
     }
 

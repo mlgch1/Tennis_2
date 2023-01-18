@@ -414,8 +414,13 @@ public class DBAdapter {
 
     // Delete all log rows in the database.
     public void Clear_Log() {
+
         db.delete(TABLE_LOG, null, null);
+        db.update(SQLITE_SEQUENCE log = 1 WHERE name = 'SYSTEM';
     }
+
+
+//     db.execSQL("UPDATE SQLITE_SEQUENCE SET log = <1> WHERE name = 'LOG'");
 
 
     // ***********************************

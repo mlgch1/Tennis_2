@@ -13,9 +13,9 @@ public class RulesActivity extends Activity {
 
     DBAdapter myDb;
 
-    private int no_sets = 3;        // 3 set game   default
-    private int set_type;           // 0 - Advantage set    1 - Tie Break set
-    private int last_set_type;      // 0 - Advantage set    1 - Tie Break set
+    private int no_Sets_int = 3;        // 3 set game   default
+    private boolean set_Type_bool;
+    private boolean last_Set_Type_bool;
 
     private int no_adv;
 
@@ -37,14 +37,18 @@ public class RulesActivity extends Activity {
         myDb = new DBAdapter(this);
         myDb.open();
 
-        no_sets = myDb.readSystem(DBAdapter.KEY_SYSTEM_NO_SETS);
-        set_type = myDb.readSystem(DBAdapter.KEY_SYSTEM_SET_TYPE);
-        last_set_type = myDb.readSystem(DBAdapter.KEY_SYSTEM_LAST_SET);
+        no_Sets_int = myDb.readSystem(DBAdapter.KEY_SYSTEM_NO_SETS);
+        set_Type_bool = (myDb.readSystem(DBAdapter.KEY_SYSTEM_SET_TYPE) == 1);
+        last_Set_Type_bool = (myDb.readSystem(DBAdapter.KEY_SYSTEM_LAST_SET) == 1);
+
         no_adv = myDb.readSystem(DBAdapter.KEY_SYSTEM_NO_ADV);
+
         short_sets = myDb.readSystem(DBAdapter.KEY_SYSTEM_SHORT_SETS);
         ss_4 = myDb.readSystem(DBAdapter.KEY_SYSTEM_SS_4);
         ss_3 = myDb.readSystem(DBAdapter.KEY_SYSTEM_SS_3);
+
 //        fast4 = myDb.readSystem(DBAdapter.KEY_SYSTEM_FAST4);
+
         match_tb_game = myDb.readSystem(DBAdapter.KEY_SYSTEM_MATCH_TB);
         mtb_7 = myDb.readSystem(DBAdapter.KEY_SYSTEM_MTB_7);
         mtb_10 = myDb.readSystem(DBAdapter.KEY_SYSTEM_MTB_10);
@@ -105,7 +109,7 @@ public class RulesActivity extends Activity {
         CheckBox cb_match_tb_game = findViewById(R.id.checkBox_Match_Tb_Game);
 
 // No of Sets
-        switch (no_sets) {
+        switch (no_Sets_int) {
             case 1:
                 rb_1_set.setChecked(true);
                 rb_3_set.setChecked(false);
@@ -175,7 +179,7 @@ public class RulesActivity extends Activity {
             t_head_type_of_set.setVisibility(View.INVISIBLE);
             rg_type_of_set.setVisibility(View.INVISIBLE);
 
-            last_set_type = 1;
+            last_Set_Type_bool = true;
         } else {
             showAll();
         }
@@ -207,8 +211,8 @@ public class RulesActivity extends Activity {
         rb_10_points.setChecked((mtb_10) == 1);
 
         if (match_tb_game == 1) {
-            set_type = 0;
-            last_set_type = 0;
+            set_Type_bool = false;
+            last_Set_Type_bool = false;
 
             rb_1_set.setVisibility(View.INVISIBLE);
             rb_7_points.setVisibility(View.VISIBLE);
@@ -279,13 +283,13 @@ public class RulesActivity extends Activity {
             rb_7_points.setVisibility(View.INVISIBLE);
             rb_10_points.setVisibility(View.INVISIBLE);
 
-            if (set_type == 0) {
+            if (!set_Type_bool) {
                 rg_last_set_type.setVisibility(View.INVISIBLE);
                 t_head_last_set_type.setVisibility(View.INVISIBLE);
                 rb_adv_set.setChecked(true);
                 rb_tb_set.setChecked(false);
             } else {
-                if (!(no_sets == 1)) {
+                if (!(no_Sets_int == 1)) {
                     t_head_last_set_type.setVisibility(View.VISIBLE);
                     rg_last_set_type.setVisibility(View.VISIBLE);
                 } else {
@@ -295,8 +299,8 @@ public class RulesActivity extends Activity {
                 rb_adv_set.setChecked(false);
                 rb_tb_set.setChecked(true);
 
-                rb_ls_adv_set.setChecked(last_set_type == 0);
-                rb_ls_tb_set.setChecked(last_set_type == 1);
+                rb_ls_adv_set.setChecked(!last_Set_Type_bool);
+                rb_ls_tb_set.setChecked(last_Set_Type_bool);
             }
         }
     }
@@ -311,7 +315,7 @@ public class RulesActivity extends Activity {
         RadioGroup rad = findViewById(R.id.radioGroup_last_set_type);
         rad.setVisibility(View.INVISIBLE);
 
-        no_sets = 1;
+        no_Sets_int = 1;
 
         display();
     }
@@ -319,7 +323,7 @@ public class RulesActivity extends Activity {
     // ***********************************
 
     public void onClick_3_Set(View view) {
-        no_sets = 3;
+        no_Sets_int = 3;
 
         display();
     }
@@ -327,7 +331,7 @@ public class RulesActivity extends Activity {
     // ***********************************
 
     public void onClick_5_Set(View view) {
-        no_sets = 5;
+        no_Sets_int = 5;
 
         display();
     }
@@ -335,7 +339,7 @@ public class RulesActivity extends Activity {
     // ***********************************
 
     public void onClick_Advantage(View view) {
-        set_type = 0;
+        set_Type_bool = false;
         TextView t = findViewById(R.id.head_last_set_type);
         t.setVisibility(View.INVISIBLE);
 
@@ -348,9 +352,9 @@ public class RulesActivity extends Activity {
     // ***********************************
 
     public void onClick_TieBreak(View view) {
-        set_type = 1;
+        set_Type_bool = true;
 
-        if (!(no_sets == 1)) {
+        if (!(no_Sets_int == 1)) {
             TextView t = findViewById(R.id.head_last_set_type);
             t.setVisibility(View.VISIBLE);
 
@@ -363,7 +367,7 @@ public class RulesActivity extends Activity {
             RadioGroup rad = findViewById(R.id.radioGroup_last_set_type);
             rad.setVisibility(View.INVISIBLE);
 
-            last_set_type = 1;
+            last_Set_Type_bool = true;
         }
 
         display();
@@ -372,7 +376,7 @@ public class RulesActivity extends Activity {
     // ***********************************
 
     public void onClick_Ls_Advantage(View view) {
-        last_set_type = 0;
+        last_Set_Type_bool = false;
 
         display();
     }
@@ -380,7 +384,7 @@ public class RulesActivity extends Activity {
     // ***********************************
 
     public void onClick_Ls_TieBreak(View view) {
-        last_set_type = 1;
+        last_Set_Type_bool = true;
 
         display();
     }
@@ -391,8 +395,8 @@ public class RulesActivity extends Activity {
         CheckBox cb_no_adv = findViewById(R.id.checkBox_No_Adv);
         no_adv = (cb_no_adv.isChecked() ? 1 : 0);
 
-        set_type = 0;
-        last_set_type = 0;
+        set_Type_bool = false;
+        last_Set_Type_bool = false;
 
         display();
     }
@@ -404,11 +408,11 @@ public class RulesActivity extends Activity {
         short_sets = (cb_short_sets.isChecked() ? 1 : 0);
 
         if (short_sets == 1) {
-            set_type = 1;
-            last_set_type = 1;
+            set_Type_bool = true;
+            last_Set_Type_bool = true;
         } else {
-            set_type = 0;
-            last_set_type = 0;
+            set_Type_bool = false;
+            last_Set_Type_bool = false;
         }
 
         display();
@@ -459,7 +463,7 @@ public class RulesActivity extends Activity {
             rb_1_set.setChecked(false);
             rb_3_set.setChecked(true);
             rb_5_set.setChecked(false);
-            no_sets = 3;
+            no_Sets_int = 3;
     }
 
         display();
@@ -498,13 +502,13 @@ public class RulesActivity extends Activity {
     public void Finish() {
 
         // No of sets
-        myDb.updateSystem(DBAdapter.KEY_SYSTEM_NO_SETS, no_sets);
+        myDb.updateSystem(DBAdapter.KEY_SYSTEM_NO_SETS, no_Sets_int);
 
         // Type of Set
-        myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_TYPE, set_type);
+        myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_TYPE, set_Type_bool ? 1 : 0);
 
         // Last Set
-        myDb.updateSystem(DBAdapter.KEY_SYSTEM_LAST_SET, last_set_type);
+        myDb.updateSystem(DBAdapter.KEY_SYSTEM_LAST_SET, last_Set_Type_bool ? 1 : 0);
 
         // No Advantage
         myDb.updateSystem(DBAdapter.KEY_SYSTEM_NO_ADV, no_adv);
@@ -522,16 +526,30 @@ public class RulesActivity extends Activity {
         myDb.updateSystem(DBAdapter.KEY_SYSTEM_MTB_7, mtb_7);
         myDb.updateSystem(DBAdapter.KEY_SYSTEM_MTB_10, mtb_10);
 
+        logParams();
 
-        myDb.K_Log("no_sets   " + no_sets);
-        myDb.K_Log("set_type   " + set_type);
-        myDb.K_Log("last_set_type   " + last_set_type);
-        myDb.K_Log("no_adv   " + no_adv);
-        myDb.K_Log("short_sets   " + short_sets);
-        myDb.K_Log("match_tb_game   " + match_tb_game);
-        myDb.K_Log("mtb_7   " + mtb_7);
-        myDb.K_Log("mtb_10   " + mtb_10);
+
+//        myDb.K_Log("no_adv   " + no_adv);
+//        myDb.K_Log("short_sets   " + short_sets);
+//        myDb.K_Log("match_tb_game   " + match_tb_game);
+//        myDb.K_Log("mtb_7   " + mtb_7);
+//        myDb.K_Log("mtb_10   " + mtb_10);
 
         super.finish();
+    }
+    public void logParams() {
+        myDb.K_Log("---------------------------------");
+        myDb.K_Log("Rules Activity");
+        myDb.K_Log("No. of Sets                     " + no_Sets_int);
+        myDb.K_Log("Set type                        " + set_Type_bool);
+        myDb.K_Log("Last Set type                   " + last_Set_Type_bool);
+
+//        myDb.K_Log("No. of Sets to win              " + sets_To_Win_Per_Player_int);
+//        myDb.K_Log("Minimum Games to win Set        " + min_Games_To_Win_Set_int);
+//        myDb.K_Log("Current Game type               " + current_Game_Type_bool);
+//        myDb.K_Log("Is this the next to last Set    " + next_To_Last_Set_int);
+//        myDb.K_Log("Minimum Points to win Tb Game   " + min_Points_To_Win_Tb_Game_int);
+//        myDb.K_Log("This is the last Set            " + this_Is_Last_Set_bool);
+//        myDb.K_Log("Match is complete               " + match_Complete_bool);
     }
 }

@@ -130,21 +130,25 @@ public class MainActivity extends Activity {
     private int flipCounter_int = 2;
 
     private int no_Sets_int = 0;                            // No of Sets
-    private boolean current_Set_Type_bool = false;
+    private boolean set_Type_bool = false;
     private boolean last_Set_Type_bool = false;
     private boolean current_Game_Type_bool = false;         // 0 - current game
     private boolean this_Is_Last_Set_bool = false;
 
     private int min_Games_To_Win_Set_int;
+    private int min_Points_To_Win_Tb_Game_int;
     private int next_To_Last_Set_int = 0;
     private int sets_To_Win_Per_Player_int = 0;
-
-    private boolean last_Set_is_Adv_bool = false;
 
     private boolean match_Complete_bool = false;
 
     private String c_Audio_str;
     private String c_Audio_Temp_str;
+
+
+//    private boolean last_Set_is_Tb_Game_bool = false;
+//    private boolean last_Set_is_Adv_bool = false;
+
 
 /*
     G - Game
@@ -170,9 +174,6 @@ public class MainActivity extends Activity {
     private boolean mtb_7_bool;
     private boolean mtb_10_bool;
 
-    private boolean last_Set_is_Tb_Game_bool = false;
-    private int min_Points_To_Win_Tb_Game_int;
-
     private int reset_Flag_int;
 
 // ******************************************************************************
@@ -181,7 +182,7 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        L.d("onCreate");
+        L.d("onCreate ");
 
         Intent intent = new Intent(MainActivity.this, com.scorer.tennis_android_nov22.SplashActivity.class);
         startActivity(intent);
@@ -193,7 +194,7 @@ public class MainActivity extends Activity {
 
         setupGlobals();
 
-        myDb.K_Log(getString(R.string.start_app));
+        //myDb.K_Log(getString(R.string.start_app));
 
         start_ResumeTimer();    // Delay onResume() for things to settle
 
@@ -258,7 +259,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onDestroy() {
 
-        myDb.K_Log(getString(R.string.close_app));
+        //myDb.K_Log(getString(R.string.close_app));
         myDb.close();
 
         stop_batteryTimer();
@@ -292,7 +293,7 @@ public class MainActivity extends Activity {
         myDb.close();
         myDb.open();
 
-        myDb.K_Log(getString(R.string.resume_app));
+        //myDb.K_Log(getString(R.string.resume_app));
 
         setup_Game_Variables();
 
@@ -431,7 +432,7 @@ public class MainActivity extends Activity {
 
         r2.setVisibility(View.VISIBLE);
 
-        if (!current_Set_Type_bool) {
+        if (!set_Type_bool) {
             r2.setText(R.string.advsets);
         } else {
             r2.setText(R.string.tbsets);
@@ -441,7 +442,7 @@ public class MainActivity extends Activity {
 
         r3.setVisibility(View.VISIBLE);
 
-        if (current_Set_Type_bool) {
+        if (set_Type_bool) {
             if (!last_Set_Type_bool) {
                 r3.setText(R.string.lastsetadv);
             } else {
@@ -523,7 +524,7 @@ public class MainActivity extends Activity {
 //        L.d("min_Games_To_Win_Set_int   " + min_Games_To_Win_Set_int);
 //        L.d("next_To_Last_Set_int   " + next_To_Last_Set_int);
 //        L.d("sets_To_Win_Per_Player_int   " + sets_To_Win_Per_Player_int);
-//        L.d("current_Set_Type_bool   " + current_Set_Type_bool);
+//        L.d("Set_Type_bool   " + Set_Type_bool);
 //        L.d("last_Set_is_Adv_bool   " + last_Set_is_Adv_bool);
 
 //        L.d("match_Complete_bool   " + match_Complete_bool);
@@ -533,20 +534,36 @@ public class MainActivity extends Activity {
 //        L.d("-----------------------------------------------------");
 //        L.d("-----------------------------------------------------");
 
-        myDb.K_Log("no_Sets_int   " + no_Sets_int);
-        myDb.K_Log("this_Is_Last_Set_bool   " + this_Is_Last_Set_bool);
-        myDb.K_Log("current_Game_Type_bool   " + current_Game_Type_bool);
-        myDb.K_Log("last_Set_Type_bool   " + last_Set_Type_bool);
-        myDb.K_Log("min_Games_To_Win_Set_int   " + min_Games_To_Win_Set_int);
-        myDb.K_Log("next_To_Last_Set_int   " + next_To_Last_Set_int);
-        myDb.K_Log("sets_To_Win_Per_Player_int   " + sets_To_Win_Per_Player_int);
-        myDb.K_Log("current_Set_Type_bool   " + current_Set_Type_bool);
-        myDb.K_Log("last_Set_is_Adv_bool   " + last_Set_is_Adv_bool);
-        myDb.K_Log("match_Complete_bool   " + match_Complete_bool);
-        myDb.K_Log("min_Points_To_Win_Tb_Game_int   " + min_Points_To_Win_Tb_Game_int);
-        myDb.K_Log("last_Set_is_Tb_Game_bool   " + last_Set_is_Tb_Game_bool);
 
+        logParams();
     }
+
+    // ******************************************************************************
+
+    public void logParams() {
+        myDb.K_Log("---------------------------------");
+        myDb.K_Log("Main Activity onResume");
+        myDb.K_Log("No. of Sets                     " + no_Sets_int);
+        myDb.K_Log("Set type                        " + set_Type_bool);
+        myDb.K_Log("Last Set type                   " + last_Set_Type_bool);
+        myDb.K_Log("No. of Sets to win              " + sets_To_Win_Per_Player_int);
+        myDb.K_Log("Minimum Games to win Set        " + min_Games_To_Win_Set_int);
+        myDb.K_Log("Current Game type               " + current_Game_Type_bool);
+        myDb.K_Log("Is this the next to last Set    " + next_To_Last_Set_int);
+        myDb.K_Log("Minimum Points to win Tb Game   " + min_Points_To_Win_Tb_Game_int);
+        myDb.K_Log("This is the last Set            " + this_Is_Last_Set_bool);
+        myDb.K_Log("Match is complete               " + match_Complete_bool);
+    }
+
+
+
+//        myDb.K_Log("Current Set type                " + current_Game_Type_bool);
+//        myDb.K_Log("Last Set type                   " + last_Set_is_Adv_bool);
+//        myDb.K_Log("Last Set type                   " + last_Set_is_Tb_Game_bool);
+
+
+
+
 
 // ******************************************************************************
 
@@ -630,7 +647,7 @@ public class MainActivity extends Activity {
 
 //        onPause();
 
-        myDb.K_Log(getString(R.string.reset));
+        //myDb.K_Log(getString(R.string.reset));
     }
 
 // ******************************************************************************
@@ -640,7 +657,7 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(MainActivity.this, PDFActivity.class);
         startActivity(intent);
 
-        myDb.K_Log(getString(R.string.open_rules));
+        //myDb.K_Log(getString(R.string.open_rules));
     }
 
 // ******************************************************************************
@@ -652,7 +669,7 @@ public class MainActivity extends Activity {
 
 //        onPause();
 
-        myDb.K_Log(getString(R.string.open_setup));
+        //myDb.K_Log(getString(R.string.open_setup));
     }
 
 // ******************************************************************************
@@ -662,7 +679,7 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(MainActivity.this, ResultsActivity.class);
         startActivity(intent);
 
-        myDb.K_Log(getString(R.string.open_results));
+        //myDb.K_Log(getString(R.string.open_results));
     }
 
 // ******************************************************************************
@@ -671,7 +688,7 @@ public class MainActivity extends Activity {
 
         quitAlertDialog();
 
-        myDb.K_Log(getString(R.string.quit));
+        //myDb.K_Log(getString(R.string.quit));
     }
 
 // ******************************************************************************
@@ -683,7 +700,7 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(MainActivity.this, Name_A_Activity.class);
         startActivity(intent);
 
-        myDb.K_Log(getString(R.string.open_name_a));
+        //myDb.K_Log(getString(R.string.open_name_a));
     }
 
 // ******************************************************************************
@@ -693,7 +710,7 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, Name_B_Activity.class);
         startActivity(intent);
 
-        myDb.K_Log(getString(R.string.open_name_b));
+        //myDb.K_Log(getString(R.string.open_name_b));
     }
 
 // ******************************************************************************
@@ -766,7 +783,7 @@ public class MainActivity extends Activity {
     public void setup_Game_Variables() {
 
         int no_sets = myDb.readSystem(DBAdapter.KEY_SYSTEM_NO_SETS);
-        current_Set_Type_bool = (myDb.readSystem(DBAdapter.KEY_SYSTEM_SET_TYPE) == 1);
+        set_Type_bool    = (myDb.readSystem(DBAdapter.KEY_SYSTEM_SET_TYPE) == 1);
         last_Set_Type_bool = (myDb.readSystem(DBAdapter.KEY_SYSTEM_LAST_SET) == 1);
 
         no_Adv_bool = (myDb.readSystem(DBAdapter.KEY_SYSTEM_NO_ADV) == 1);
@@ -792,7 +809,7 @@ public class MainActivity extends Activity {
             this_Is_Last_Set_bool = true;
 
             if (match_tb_game_bool) {
-                last_Set_is_Tb_Game_bool = true;
+//                last_Set_is_Tb_Game_bool = true;
                 if (mtb_7_bool) {
                     min_Points_To_Win_Tb_Game_int = 7;
                 } else {
@@ -817,7 +834,7 @@ public class MainActivity extends Activity {
             this_Is_Last_Set_bool = true;
 
             if (match_tb_game_bool) {
-                last_Set_is_Tb_Game_bool = true;
+//                last_Set_is_Tb_Game_bool = true;
                 if (mtb_7_bool) {
                     min_Points_To_Win_Tb_Game_int = 7;
                 } else {
@@ -826,9 +843,9 @@ public class MainActivity extends Activity {
             }
         }
 
-        if (!current_Set_Type_bool) {
-            last_Set_is_Adv_bool = (myDb.readSystem(DBAdapter.KEY_SYSTEM_LAST_SET) == 0);
-        }
+//        if (!set_Type_bool) {
+//            last_Set_is_Adv_bool = (myDb.readSystem(DBAdapter.KEY_SYSTEM_LAST_SET) == 0);
+//        }
 
         if (short_Sets_bool) {
             if (ss_4_bool) {
@@ -839,7 +856,7 @@ public class MainActivity extends Activity {
         }
 
         if (match_tb_game_bool) {
-            last_Set_is_Tb_Game_bool = true;
+//            last_Set_is_Tb_Game_bool = true;
 
             if (mtb_7_bool) {
                 min_Points_To_Win_Tb_Game_int = 7;
@@ -849,7 +866,7 @@ public class MainActivity extends Activity {
                 min_Points_To_Win_Tb_Game_int = 10;
             }
         } else {
-            last_Set_is_Tb_Game_bool = false;
+//            last_Set_is_Tb_Game_bool = false;
             min_Points_To_Win_Tb_Game_int = 7;
         }
 
@@ -863,7 +880,7 @@ public class MainActivity extends Activity {
                 buttons_Off(getString(R.string.h));
                 history();
 
-                c_Audio_Temp_str = getString(R.string.b);
+                c_Audio_Temp_str = getString(R.string.b);   // Tone
 
                 c_points_h++;
                 points();
@@ -879,7 +896,7 @@ public class MainActivity extends Activity {
                 buttons_Off(getString(R.string.v));
                 history();
 
-                c_Audio_Temp_str = getString(R.string.b);
+                c_Audio_Temp_str = getString(R.string.b);   // Tone
 
                 c_points_v++;
                 points();
@@ -958,7 +975,7 @@ public class MainActivity extends Activity {
         }
 
         c_Audio_str = c_Audio_Temp_str;
-        c_Audio_Temp_str = getString(R.string.x);
+        c_Audio_Temp_str = getString(R.string.x);   // Nothing
 
 //        if (match_Complete_bool) {
 //            c_points_h = 0;
@@ -1042,9 +1059,9 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(MainActivity.this, Splash_GameActivity.class);
         startActivity(intent);
 
-//        L.d(getString(R.string.game_adv));
+        L.d(getString(R.string.game_adv));
 
-        c_Audio_Temp_str = getString(R.string.g);
+        c_Audio_Temp_str = getString(R.string.g);   // Game
 
         flip_server();
 
@@ -1066,9 +1083,9 @@ public class MainActivity extends Activity {
                 intent = new Intent(MainActivity.this, Splash_SetActivity.class);
                 startActivity(intent);
 
-//                L.d(getString(R.string.sets_adv));
+                L.d(getString(R.string.sets_adv));
 
-                c_Audio_Temp_str = getString(R.string.s);
+                c_Audio_Temp_str = getString(R.string.s);   // Set
             }
         }
 
@@ -1084,9 +1101,9 @@ public class MainActivity extends Activity {
                 intent = new Intent(MainActivity.this, Splash_SetActivity.class);
                 startActivity(intent);
 
-//                L.d(getString(R.string.sets_adv));
+                L.d(getString(R.string.sets_adv));
 
-                c_Audio_Temp_str = getString(R.string.s);
+                c_Audio_Temp_str = getString(R.string.s);   // Set
             }
         }
 
@@ -1152,7 +1169,7 @@ public class MainActivity extends Activity {
             results();
 
             if (this_Is_Last_Set_bool) {
-//                    L.d(getString(R.string.match));
+                L.d(getString(R.string.match));
 
                 match();
 
@@ -1171,9 +1188,9 @@ public class MainActivity extends Activity {
                 Intent intent = new Intent(MainActivity.this, Splash_SetActivity.class);
                 startActivity(intent);
 
-//                    L.d(getString(R.string.sets_tb));
+                L.d(getString(R.string.sets_tb));
 
-                c_Audio_Temp_str = getString(R.string.s);
+                c_Audio_Temp_str = getString(R.string.s);   // Set
             }
 
 //                if ((c_points_h >= min_Points_To_Win_Tb_Game_int) & (c_points_v <= (c_points_h - 2))) {
@@ -1211,7 +1228,7 @@ public class MainActivity extends Activity {
 
                     flip_server();
 
-                    c_Audio_Temp_str = getString(R.string.c);
+                    c_Audio_Temp_str = getString(R.string.c);   // Change Ends
                 }
             }
         }
@@ -1223,9 +1240,9 @@ public class MainActivity extends Activity {
     private boolean match() {
         if (c_sets_h == sets_To_Win_Per_Player_int || c_sets_v == sets_To_Win_Per_Player_int) {
 
-//            L.d(getString(R.string.match));
+            L.d(getString(R.string.match));
 
-            c_Audio_Temp_str = getString(R.string.m);
+            c_Audio_Temp_str = getString(R.string.m);   // Match
 
             all_Buttons_Off();
 
@@ -1263,12 +1280,12 @@ public class MainActivity extends Activity {
             return;
         }
 
-        if (current_Set_Type_bool) {               // Tb Set
+        if (set_Type_bool) {               // Tb Set
             if ((c_sets_h == next_To_Last_Set_int) || (c_sets_v == next_To_Last_Set_int)) {       // Last Set
                 this_Is_Last_Set_bool = true;
 
                 if (match_tb_game_bool) {
-                    last_Set_is_Tb_Game_bool = true;
+//                    last_Set_is_Tb_Game_bool = true;
                     if (mtb_7_bool) {
                         min_Points_To_Win_Tb_Game_int = 7;
                     } else {
@@ -1288,7 +1305,7 @@ public class MainActivity extends Activity {
                 if ((c_sets_h == next_To_Last_Set_int) || (c_sets_v == next_To_Last_Set_int)) {       // Last Set
                     this_Is_Last_Set_bool = true;
 
-                    current_Game_Type_bool = !last_Set_is_Adv_bool;
+                    current_Game_Type_bool = last_Set_Type_bool;
                 } else {
                     current_Game_Type_bool = true;
                 }
@@ -1297,7 +1314,7 @@ public class MainActivity extends Activity {
 
         if (match_tb_game_bool) {
             this_Is_Last_Set_bool = true;
-            last_Set_is_Tb_Game_bool = true;
+//            last_Set_is_Tb_Game_bool = true;
             current_Game_Type_bool = true;
         }
 
@@ -1381,12 +1398,12 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(MainActivity.this, Splash_AdvActivity.class);
         startActivity(intent);
 
-//        L.d(getString(R.string.adv));
+        L.d(getString(R.string.adv));
 
         if (server.equals(getString(R.string.h))) {
-            c_Audio_Temp_str = getString(R.string.A);
+            c_Audio_Temp_str = getString(R.string.A);   // Adv Server
         } else {
-            c_Audio_Temp_str = getString(R.string.a);
+            c_Audio_Temp_str = getString(R.string.a);   // Adv Receiver
         }
     }
 
@@ -1397,12 +1414,12 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(MainActivity.this, Splash_AdvActivity.class);
         startActivity(intent);
 
-//        L.d(getString(R.string.adv));
+        L.d(getString(R.string.adv));
 
         if (server.equals(getString(R.string.v))) {
-            c_Audio_Temp_str = getString(R.string.A);
+            c_Audio_Temp_str = getString(R.string.A);   // Adv Server
         } else {
-            c_Audio_Temp_str = getString(R.string.a);
+            c_Audio_Temp_str = getString(R.string.a);   // Adv Receiver
         }
     }
 
@@ -1413,9 +1430,9 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(MainActivity.this, Splash_DeuceActivity.class);
         startActivity(intent);
 
-//        L.d("Deuce");
+        L.d("Deuce");
 
-        c_Audio_Temp_str = "D";
+        c_Audio_Temp_str = "D"; // Deuce
     }
 
 // ******************************************************************************
@@ -1425,9 +1442,9 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(MainActivity.this, Splash_DeuceActivity.class);
         startActivity(intent);
 
-//        L.d("Back to Deuce");
+        L.d("Back to Deuce");
 
-        c_Audio_Temp_str = "D";
+        c_Audio_Temp_str = "D"; // Deuce
 
         c_points_h--;
         c_points_v--;
@@ -1548,83 +1565,79 @@ public class MainActivity extends Activity {
         ad.setMessage(message);
         ad.setPositiveButton(button1String, (dialog, arg1) -> {
 
-            myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_NAME_A, getString(R.string.home));
-            myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_NAME_B, getString(R.string.visitors));
+                    myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_NAME_A, getString(R.string.home));
+                    myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_NAME_B, getString(R.string.visitors));
 
-            // Reset scores
-            myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_POINTS_A, "0");
-            myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_POINTS_B, "0");
-            myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_GAMES_A, "0");
-            myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_GAMES_B, "0");
-            myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_SETS_A, "0");
-            myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_SETS_B, "0");
+                    // Reset scores
+                    myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_POINTS_A, "0");
+                    myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_POINTS_B, "0");
+                    myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_GAMES_A, "0");
+                    myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_GAMES_B, "0");
+                    myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_SETS_A, "0");
+                    myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_SETS_B, "0");
 
-            // Reset Results
-            myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_1_H, 0);
-            myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_1_V, 0);
-            myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_2_H, 0);
-            myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_2_V, 0);
-            myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_3_H, 0);
-            myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_3_V, 0);
-            myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_4_H, 0);
-            myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_4_V, 0);
-            myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_5_H, 0);
-            myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_5_V, 0);
+                    // Reset Results
+                    myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_1_H, 0);
+                    myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_1_V, 0);
+                    myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_2_H, 0);
+                    myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_2_V, 0);
+                    myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_3_H, 0);
+                    myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_3_V, 0);
+                    myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_4_H, 0);
+                    myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_4_V, 0);
+                    myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_5_H, 0);
+                    myDb.updateSystem(DBAdapter.KEY_SYSTEM_SET_5_V, 0);
 
-            t = findViewById(id.id_b_pointsNeg_a);
-            t.setVisibility(View.INVISIBLE);
-            t = findViewById(id.id_b_pointsNeg_b);
-            t.setVisibility(View.INVISIBLE);
+                    t = findViewById(id.id_b_pointsNeg_a);
+                    t.setVisibility(View.INVISIBLE);
+                    t = findViewById(id.id_b_pointsNeg_b);
+                    t.setVisibility(View.INVISIBLE);
 
-            // Reset Server
-            t = findViewById(id.id_server_mark_a);
-            t.setVisibility(View.INVISIBLE);
-            t = findViewById(id.id_server_mark_b);
-            t.setVisibility(View.INVISIBLE);
+                    // Reset Server
+                    t = findViewById(id.id_server_mark_a);
+                    t.setVisibility(View.INVISIBLE);
+                    t = findViewById(id.id_server_mark_b);
+                    t.setVisibility(View.INVISIBLE);
 
-            server = "Z";
-            myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_SERVER, server);
+                    server = "Z";
+                    myDb.updateSystemStr(DBAdapter.KEY_SYSTEM_SERVER, server);
 
-            strPlayerButton = "Z";
-            buttons_On();
+                    strPlayerButton = "Z";
+                    buttons_On();
 
-            t = findViewById(id.id_set_server);
-            t.setVisibility(View.VISIBLE);
+                    t = findViewById(id.id_set_server);
+                    t.setVisibility(View.VISIBLE);
 
-            flipFlag_bool = false;
-            flipCounter_int = 2;
+                    flipFlag_bool = false;
+                    flipCounter_int = 2;
 
-            stop_reset_flashTimer();
+                    stop_reset_flashTimer();
 
-            myDb.updateSystem(DBAdapter.KEY_SYSTEM_RESET, 0);
-            reset_Flag_int = 0;
+                    myDb.updateSystem(DBAdapter.KEY_SYSTEM_RESET, 0);
+                    reset_Flag_int = 0;
 
-            t = findViewById(id.id_notice);
-            t.setVisibility(View.VISIBLE);
+                    t = findViewById(id.id_notice);
+                    t.setVisibility(View.VISIBLE);
 
-            current_Game_Type_bool = false;
-            match_Complete_bool = false;
-            this_Is_Last_Set_bool = false;
+                    current_Game_Type_bool = false;
+                    match_Complete_bool = false;
+                    this_Is_Last_Set_bool = false;
 
+//                    changeRulesDialog();
 
-            changeRulesDialog();
+                    myDb.K_Log("Reset Yes");
 
+                    Intent s_intent = new Intent(MainActivity.this, RulesActivity.class);
+                    startActivity(s_intent);
 
-
-
-
-
-
-            myDb.K_Log("Reset Yes");
-
-            onResume();
-        }
+                    onResume();
+                }
         );
 
         ad.setNegativeButton(button2String, (dialog, arg1) -> {
-            // do nothing
-            myDb.K_Log("Reset No");
-        }
+                    // do nothing
+                    //myDb.K_Log("Reset No");
+                }
         );
         ad.show();
     }
@@ -1641,40 +1654,40 @@ public class MainActivity extends Activity {
         ad.setMessage(message);
         ad.setPositiveButton(button1String, (dialog, arg1) -> {
 
-            myDb.K_Log("Quit App");
+            //myDb.K_Log("Quit App");
 
             finish();
         });
         ad.setNegativeButton(button2String, (dialog, arg1) -> {
             // do nothing
-            myDb.K_Log("Quit Not");
+            //myDb.K_Log("Quit Not");
         });
         ad.show();
     }
 
-// ******************************************************************************
-
-    private void changeRulesDialog() {
-
-        Context context = MainActivity.this;
-        String message = "Do you want to Change the Rules for the next Match?";
-        String button1String = "Change";
-        String button2String = "Cancel";
-        AlertDialog.Builder ad = new AlertDialog.Builder(context);
-        ad.setMessage(message);
-        ad.setPositiveButton(button1String, (dialog, arg1) -> {
-
-            myDb.K_Log("Change Rules");
-
-            Intent s_intent = new Intent(MainActivity.this, RulesActivity.class);
-            startActivity(s_intent);
-        });
-        ad.setNegativeButton(button2String, (dialog, arg1) -> {
-            // do nothing
-            myDb.K_Log("Don't Change Rules");
-        });
-        ad.show();
-    }
+//// ******************************************************************************
+//
+//    private void changeRulesDialog() {
+//
+//        Context context = MainActivity.this;
+//        String message = "Do you want to Change the Rules for the next Match?";
+//        String button1String = "Change";
+//        String button2String = "Cancel";
+//        AlertDialog.Builder ad = new AlertDialog.Builder(context);
+//        ad.setMessage(message);
+//        ad.setPositiveButton(button1String, (dialog, arg1) -> {
+//
+//            //myDb.K_Log("Change Rules");
+//
+//            Intent s_intent = new Intent(MainActivity.this, RulesActivity.class);
+//            startActivity(s_intent);
+//        });
+//        ad.setNegativeButton(button2String, (dialog, arg1) -> {
+//            // do nothing
+//            //myDb.K_Log("Don't Change Rules");
+//        });
+//        ad.show();
+//    }
 
 // ******************************************************************************
 // Timer to delay running onResume on start up
@@ -1864,7 +1877,7 @@ public class MainActivity extends Activity {
                     finish();
                     break;
             }
-            myDb.K_Log("Battery Message - " + mess);
+            //myDb.K_Log("Battery Message - " + mess);
 
             batteryAlertDialog(mess, Integer.toString(batteryMessageNo));
             batteryMessageNo--;
@@ -1881,7 +1894,7 @@ public class MainActivity extends Activity {
         }
         Alarm.soundAlarm(context);
 
-        myDb.K_Log(message + "  " + no);
+        //myDb.K_Log(message + "  " + no);
 
         Context context = MainActivity.this;
         String button1String = "Acknowledge";
@@ -2219,13 +2232,13 @@ public class MainActivity extends Activity {
 
 
                 setTest(false);
-                s1 = "GJCXXXZ8888888888";
+                s1 = "GJCXXXS8888888888";       // S for both server leds
             } else {
                 setTest(true);
                 s1 = "GJCXXXZBBBBBBBBBB";
             }
         } else {
-            s1 = "GJCXX"                    //+ "Z8888888888";
+            s1 = "GJCXX"
                     + c_Audio_str
                     + server
                     + c_sets_v
@@ -2235,7 +2248,7 @@ public class MainActivity extends Activity {
                     + padLeftZero(c_games_h, 2)
                     + convert_Points_Transmit(c_points_h);
 
-            c_Audio_str = "X";
+            c_Audio_str = "X";  // Nothing
         }
         return s1;
     }
@@ -2254,7 +2267,7 @@ public class MainActivity extends Activity {
 // TODO
 
 
-//        wifi_counter.start();
+        wifi_counter.start();
     }
 
 // ******************************************************************************
