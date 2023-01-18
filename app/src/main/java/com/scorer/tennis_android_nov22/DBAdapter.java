@@ -21,7 +21,7 @@ public class DBAdapter {
     // ***********************************
 
     // Database Version
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
     // ***********************************
 
 // 5 - Added Reset
@@ -414,9 +414,7 @@ public class DBAdapter {
 
     // Delete all log rows in the database.
     public void Clear_Log() {
-
         db.delete(TABLE_LOG, null, null);
-        db.update(SQLITE_SEQUENCE log = 1 WHERE name = 'SYSTEM';
     }
 
 

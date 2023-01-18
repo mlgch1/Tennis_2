@@ -56,9 +56,9 @@ public class LogActivity extends Activity {
         startManagingCursor(cursor);
 
         // Setup mapping from cursor to view fields:
-        String[] fromFieldNames = new String[]{DBAdapter.KEY_LOG_ID, DBAdapter.KEY_LOG_DATE, DBAdapter.KEY_LOG_TIME, DBAdapter.KEY_LOG_LOG};
+        String[] fromFieldNames = new String[]{DBAdapter.KEY_LOG_DATE, DBAdapter.KEY_LOG_TIME, DBAdapter.KEY_LOG_LOG};
 
-        int[] toViewIDs = new int[]{R.id.item_id, R.id.item_date, R.id.item_time, R.id.item_log};
+        int[] toViewIDs = new int[]{R.id.item_date, R.id.item_time, R.id.item_log};
 
         // Create adapter to many columns of the DB onto elements in the UI.
         SimpleCursorAdapter myCursorAdapter = new SimpleCursorAdapter(this,     // Context
